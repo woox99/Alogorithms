@@ -11,16 +11,16 @@
 // rFib(5) = 5 (2+3).rFib(3.65) = rFib(3) = 2, rFib(-2) = rFib(0) = 0.
 
 
-// const rFib = val => {
-//     if(val==0){
-//         return 0;
-//     }
-//     if(val==1){
-//         return 1;
-//     }
-//     return rFib(val-1) + rFib(val-2);
-// }
-// console.log(rFib(6))
+const rFib = val => {
+    if(val==0){
+        return 0;
+    }
+    if(val==1){
+        return 1;
+    }
+    return rFib(val-1) + rFib(val-2);
+}
+console.log(rFib(6))
 
 
 
