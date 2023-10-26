@@ -22,6 +22,22 @@
 // Given two integers, create rGCF(num1,num2) to recursively determine Greatest Common 
 // Factor (the largest integer dividing evenly into both). Greek mathematician Euclid demonstrated these facts:
 
+// const gcf = (a, b) => {
+//     if (a === 0) {
+//         return b;
+//     }
+//     if (b === 0) {
+//         return a;
+//     }
+
+//     if (a > b) {
+//         return gcf(a % b, b);
+//     } else {
+//         return gcf(a, b % a);
+//     }
+// }
+
+// console.log(gcf(3, 7));
 
 
 // gcf(a,b) == a, if a == b;
