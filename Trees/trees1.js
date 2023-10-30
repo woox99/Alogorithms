@@ -24,6 +24,9 @@ class BST {
             const searchTree = currentNode => {
                 if (data < currentNode.data) {
                     if (currentNode.left == null) {
+                        // Linking the nodesin the tree must be done using .left or .right when adding or creating tree
+                        // Example: currentNode.left = newNode; changes the instance
+                        // currentNode = newNode; only changes the 'currentNode' reference to the instance
                         currentNode.left = newNode;
                         return;
                     }
