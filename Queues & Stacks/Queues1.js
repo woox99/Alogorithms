@@ -1,3 +1,5 @@
+//Linked List Queue
+
 class Node{
     constructor(data){
         this.data = data;
@@ -11,19 +13,18 @@ class Queue{
         this.tail = null;
     }
 
-    addEnd(data){
+    // Queues are first in first out (FIFO) so new data gets added to the back
+    enqueue(data){
         const newNode = new Node(data);
-
         if(!this.head){
             this.head = newNode;
             this.tail = newNode;
-            return;
+            return
         }
         else{
             this.tail.next = newNode;
-            this.tail = newNode;
+            this.tail = this.tail.next
         }
-        return;
     }
 
     isEmpty(){
@@ -37,9 +38,12 @@ class Queue{
         }
     }
 
-    front(){
-        console.log(this.head.data);
-        return this.head.data;
+    removeFront(){
+        const value = this.head.data;
+        this.head = this.head.next;
+
+        console.log(value)
+        return value;
     }
 
     contains(data){
@@ -100,19 +104,18 @@ const compareQueues = (q1, q2) => {
 
 
 slq = new Queue();
-slq.addEnd(2)
-slq.addEnd(3)
-slq.addEnd(1)
-// console.log(slq)
-// slq.front()
+slq.enqueue(2)
+slq.enqueue(3)
+slq.enqueue(4)
+// slq.removeFront()
 // slq.isEmpty()
 // slq.contains(2)
 // slq.size()
-removeMin(slq)
+// removeMin(slq)
+console.log(slq)
 
-slq2 = new Queue();
-slq2.addEnd(1);
-slq2.addEnd(2);
-
+// slq2 = new Queue();
+// slq2.enqueue(1);
+// slq2.enqueue(2);
 // compareQueues(slq, slq2);
 

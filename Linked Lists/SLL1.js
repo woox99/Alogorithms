@@ -5,14 +5,14 @@ class Node {
     }
 }
 
-class LinkedList {
+class SLL {
     constructor() {
         this.head = null;
     }
 
-    addFront(val) {
-        // Creating a new node object with the value provided
-        let newNode = new Node(val);
+    addFront(data) {
+        // Creating a new node object with the data provided
+        let newNode = new Node(data);
 
         // Checking to see if the current list does not have a head node (if the list is empty)
         // If the list is empty, place the new node as the head 
@@ -29,12 +29,33 @@ class LinkedList {
         return this;
     }
 
+    addEnd(data){
+        const newNode = new Node(data);
+        let runner = this.head;
+
+        while(runner.next){
+            runner = runner.next;
+        }
+        
+        return runner.next = newNode;
+    }
+
     removeFront() {
         if (!this.head) {
             return null;
         }
 
         this.head = this.head.next;
+    }
+
+    removeEnd(){
+        let runner = this.head;
+
+        while(runner.next.next){
+            runner = runner.next
+        }
+
+        return runner.next = null;
     }
 
     front() {
@@ -46,10 +67,10 @@ class LinkedList {
 
 }
 
-const SLL = new LinkedList();
-SLL.addFront(18)
-SLL.addFront(5)
-SLL.addFront(100)
-// SLL.removeFront();
-// console.log(SLL.front());
-console.log(SLL)
+const sll = new SLL();
+sll.addFront(1)
+sll.addFront(2)
+// sll.addEnd(3)
+// sll.removeFront()
+// sll.removeEnd()
+console.log(sll)
