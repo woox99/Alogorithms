@@ -52,4 +52,4 @@ SLL.addFront(5)
 SLL.addFront(100)
 // SLL.removeFront();
 // console.log(SLL.front());
-// console.log(SLL)
+console.log(SLL)
