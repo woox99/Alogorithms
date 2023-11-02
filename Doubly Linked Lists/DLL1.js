@@ -35,13 +35,28 @@ class DLL {
             return;
         }
         else{
-            let temp = this.tail;
+            newNode.prev = this.tail;
+            this.tail.next = newNode;
             this.tail = newNode;
-            temp.next = this.tail;
-            this.tail.prev = temp;
         }
         this.length++;
         return;
+    }
+    pushFront(data){
+        const newNode = new Node(data);
+        if(!this.head){
+            this.head = newNode;
+            this.tail = newNode;
+            this.length++;
+            return;
+        }
+        else{
+            this.head.prev = newNode;
+            newNode.next = this.head;
+            this.head = newNode;
+        }
+        this.length++;
+        return
     }
 
     // Reverse is changing the direction that the DLL points by swapping .next and .prev
@@ -102,9 +117,9 @@ dll.pushEnd(3)
 dll.pushEnd(2)
 dll.pushEnd(1)
 
-dll.isPalindrome()
+// dll.isPalindrome()
 // dll.reverse()
 // dll.kToLast(2)
 
-// dll.display()
+dll.display()
 // console.log(dll)
