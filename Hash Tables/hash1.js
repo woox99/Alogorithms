@@ -1,3 +1,7 @@
+const print = data => {
+    console.log(data);
+}
+
 class HashTable{
     constructor(size){
         this.table = new Array(size);
