@@ -1,0 +1,91 @@
+class UnionFind {
+    // O(N)
+    constructor(size) {
+        this.root = [];
+        this.depth = [];
+
+        // Initialize groups with each being its own root
+        for (let i = 0; i < size; i++) {
+            this.root[i] = i;
+            this.depth[i] = 0;
+        }
+    }
+
+    // Return the representative (root) of the group that x belongs to
+    // O(1)
+    find(x) {
+        return this.root[x];
+    }
+
+    displayRoot(x) {
+        console.log(this.root[x]);
+        return this.root[x];
+    }
+
+    // Join two groups
+    //O(N)
+    union(x, y) {
+        const rootX = this.find(x);
+        const rootY = this.find(y);
+
+        // If x and y are not in the same group
+        if (rootX !== rootY) {
+            // If group X is smaller, add it to group Y
+            if (this.depth[rootX] < this.depth[rootY]) {
+                this.root[rootX] = rootY;
+                // Set the root of all numbers added to group Y to the root of Y
+                for (let i = 0; i < this.root.length; i++) {
+                    if (this.root[i] === rootX) {
+                        this.root[i] = rootY;
+                    }
+                }
+            }
+            // If group Y is smaller, add it to group X
+            else if (this.depth[rootY] < this.depth[rootX]) {
+                this.root[rootY] = rootX;
+                for (let i = 0; i < this.root.length; i++) {
+                    if (this.root[i] === rootY) {
+                        this.root[i] = rootX;
+                    }
+                }
+            }
+            // If groups are are the same size, add group Y to group X and increase the depth of group X
+            else {
+                this.root[rootY] = rootX;
+                this.depth[rootX]++;
+                for (let i = 0; i < this.root.length; i++) {
+                    if (this.root[i] === rootY) {
+                        this.root[i] = rootX;
+                    }
+                }
+            }
+        }
+    }
+
+    // Check if two groups nodes are in the same group
+    // O(1)
+    connected(x, y){
+        const rootX = this.find(x);
+        const rootY = this.find(y);
+
+        console.log(rootX == rootY);
+        return rootX == rootY;
+    }
+}
+
+const uf = new UnionFind(4);
+
+console.log('Each root is itself:')
+console.log(uf.root)
+
+console.log('Each root is the root of the group:')
+uf.union(0,1)
+uf.union(2,3)
+console.log(uf.root)
+
+console.log('Each group belongs to 0:')
+uf.union(0, 2)
+console.log(uf.root)
+
+// console.log(uf.depth[0])
+// uf.connected(1,3)

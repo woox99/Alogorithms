@@ -1,4 +1,5 @@
 class UnionFind{
+    // O(N)
     constructor(size){
         this.parent = [];
         this.depth = [];
@@ -11,6 +12,7 @@ class UnionFind{
     }
 
     // Find the representative (root) of a group
+    // O(logN)
     find(x){
         // The representative of a group has itself as a parent,
         if(this.parent[x] != x){
@@ -28,6 +30,8 @@ class UnionFind{
         return this.parent[x];
     }
 
+    // Join two groups
+    // O(logN)
     union(x,y){
         const rootX = this.find(x);
         const rootY = this.find(y);
@@ -50,6 +54,21 @@ class UnionFind{
         }
     }
 
+    // Check if two nodes are connect (same root node)
+    // O(logN)
+    connected(x, y){
+        const rootX = this.find(x);
+        const rootY = this.find(y);
+
+        if( rootX === rootY){
+            console.log(true);
+            return true;
+        }
+
+        console.log(false);
+        return false;
+    }
+
 }
 
 const uf = new UnionFind(4);
@@ -61,8 +80,11 @@ uf.union(0,1)
 uf.union(2,3)
 uf.union(0,2)
 
-console.log(uf.depth[0])
-console.log(uf.depth[2])
+// console.log(uf.depth[0])
+// console.log(uf.depth[2])
 
-uf.displayRoot(3)
-// console.log(uf.parent)
+// uf.displayRoot(3)
+
+// uf.connected(1,3);
+
+console.log(uf.parent)
