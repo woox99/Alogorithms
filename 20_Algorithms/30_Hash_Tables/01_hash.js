@@ -57,4 +57,5 @@ class HashTable{
 
 const ht = new HashTable(10);
 ht.set('age', 27)
+ht.set('age', 100)
 ht.get('age')
