@@ -4,7 +4,7 @@ arr1.push(1);
 arr1.push(2);
 arr1.push(3);
 
-//Sparce Array
+// Sparce Array
 const arr2 = new Array(10);
 arr2[0] = 1;
 arr2[1] = 2;
@@ -19,7 +19,6 @@ const length = arr1.length
 
 // Filter
 const newArr = arr1.filter(entry => entry % 2 === 0);
-
 
 // Swapping indices in ES6 without temp
 console.log('before swap: ' + arr1);

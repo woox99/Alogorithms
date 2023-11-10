@@ -1,78 +1,89 @@
+// Index equations
 // left: index * 2
 // right: index * 2 + 1
 // parent: Math.floor(index/2)
 
-class MinHeap {
-    constructor() {
-        this.heap = [null]; // Index 0 will stay null
+class MinHeap{
+    constructor(){
+        this.heap = [null]; // index 0 will stay null so that index equations work
     }
 
-    insert(data) {
+    // O(LogN)
+    insert(data){
         this.heap.push(data);
 
-        if (this.heap.length > 2) {
-            let index = this.heap.length - 1;
+        let index = this.heap.length - 1;
+        let parentIndex = Math.floor(index/2)
 
-            // While current node is not root node && current node value is < parent node value, swap them
-            while (index > 1 && this.heap[index] < this.heap[Math.floor(index / 2)]) {
-                let temp = this.heap[Math.floor(index / 2)];
-                this.heap[Math.floor(index / 2)] = this.heap[index];
-                this.heap[index] = temp;
-
-                index = Math.floor(index / 2);
+        // While current node is not root node && current node value is < parent node value, swap them
+        if(this.heap.length > 2){
+            while(index > 1 && this.heap[index] < this.heap[parentIndex]){
+                [this.heap[index], this.heap[parentIndex]] = [this.heap[parentIndex], this.heap[index]];
+                parentIndex = Math.floor(index / 2);
             }
         }
+
+        return this;
     }
 
-    // Remove always removes the root node (index 1)
-    remove() {
+    // Remove always removes the root node (index 1), replaces it with the last value in the array and re-sorts it
+    // O(LogN)
+    remove(){
         const removedNode = this.heap[1];
 
-        if (this.heap.length > 2) {
-            // Replace the root node with the last node
+        if(this.heap.length == 1){
+            return null;
+        }
+        // If only one node, simply remove it
+        if(this.heap.length == 2){
+            this.heap.length--;
+            return removedNode;
+        }
+        if(this.heap.length > 2){
             this.heap[1] = this.heap[this.heap.length - 1];
-            // Remove the last node
-            this.heap.pop();
-
+            this.heap.length--;
+            
             let index = 1;
             let left = index * 2;
             let right = index * 2 + 1;
 
-            while (
+            while(
                 (this.heap[left] !== undefined && this.heap[index] > this.heap[left]) ||
                 (this.heap[right] !== undefined && this.heap[index] > this.heap[right])
-            ) {
+            ){
                 // Smaller value of left or right swaps with current node so its the smallest of the three when it becomes parent
-                if (this.heap[right] === undefined || this.heap[left] < this.heap[right]) {
-                    let temp = this.heap[index];
-                    this.heap[index] = this.heap[left];
-                    this.heap[left] = temp;
+                if(this.heap[right] !== undefined){
+                    [this.heap[index], this.heap[left]] = [this.heap[left], this.heap[index]];
                     index = left;
-                } else {
-                    let temp = this.heap[index];
-                    this.heap[index] = this.heap[right];
-                    this.heap[right] = temp;
+                }
+                else if(this.heap[left] < this.heap[right]){
+                    [this.heap[index], this.heap[left]] = [this.heap[left], this.heap[index]];
+                    index = left;
+                }
+                else if(this.heap[right] < this.heap[left]){
+                    [this.heap[index], this.heap[right]] = [this.heap[right], this.heap[index]];
                     index = right;
                 }
 
                 left = index * 2;
                 right = index * 2 + 1;
             }
-        } else if (this.heap.length === 2) {
-            this.heap.pop();
-        } else {
-            return null;
         }
 
         return removedNode;
     }
 }
 
-const mh = new MinHeap();
-mh.insert(1);
-mh.insert(3);
-mh.insert(4);
-mh.insert(6);
-mh.insert(20);
-mh.remove();
-console.log(mh.heap);
+const mh = new MinHeap()
+mh.insert(3)
+mh.insert(2)
+mh.insert(1)
+mh.insert(4)
+mh.insert(5)
+mh.insert(10)
+mh.insert(11)
+mh.insert(9)
+mh.remove()
+mh.remove()
+
+console.log(mh.heap)
