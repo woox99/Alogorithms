@@ -24,3 +24,7 @@ const newArr = arr1.filter(entry => entry % 2 === 0);
 console.log('before swap: ' + arr1);
 [arr1[0], arr1[1]] = [arr1[1], arr1[0]];
 console.log('after swap: ' + arr1)
+
+// Concat
+const combinedArray = arr1.concat(arr2);
+

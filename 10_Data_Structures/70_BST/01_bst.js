@@ -49,6 +49,7 @@ class BST {
         let currentNode = this.root;
 
         const searchTree = currentNode => {
+            // If node reached the bottom, return false
             if (currentNode === null) {
                 console.log(false);
                 return false;
@@ -64,48 +65,36 @@ class BST {
     }
 
     remove(data) {
-
         const removeNode = (currentNode, data) => {
-            // If currentNode ends up on a null node, then tree does not contain data
-            if(currentNode === null){
+            if (currentNode === null) {
                 return null;
             }
-
-            // Traverse the tree
-            if(data < currentNode.data){
-                return removeNode(currentNode.left, data)
-            }
-            if(data > currentNode.data){
-                return removeNode(currentNode.right, data)
-            }
-
-            // If currentNode is the node we are searching for, replace it with the correct node
-            if(data === currentNode.data){
-                // If currentNode has no children set node to null (delete)
-                if(currentNode.left === null && currentNode.right === null){
-                    return null;
-                }
-                // If currentNode has only one child, replace it with its child
-                if(currentNode.left === null){
+    
+            if(data < currentNode.data) {
+                currentNode.left = removeNode(currentNode.left, data);
+            } 
+            if(data > currentNode.data) {
+                currentNode.right = removeNode(currentNode.right, data);
+            } 
+            if(data === currentNode.data) {
+                if (currentNode.left === null) {
                     return currentNode.right;
-                }
-                if(currentNode.right === null){
+                } 
+                if (currentNode.right === null) {
                     return currentNode.left;
                 }
-
-                // If currentNode has both left and right children, replace with the leftmost node on the right branch
+    
                 let tempNode = currentNode.right;
-                while(tempNode.left !== null){
-                    tempNode = tempNode.left;
+                while(tempNode.left){
+                    tempNode = currentNode.left;
                 }
                 currentNode.data = tempNode.data;
-                // Use the remove function recursively to remove the node we just replaced currentNode with
                 currentNode.right = removeNode(currentNode.right, tempNode.data);
-                // Replace currentNode with itself because it has the updated value
-                return currentNode;
             }
-        }
-
+    
+            return currentNode;
+        };
+    
         this.root = removeNode(this.root, data);
     }
 }
@@ -115,9 +104,9 @@ bst.insert(2)
 bst.insert(3)
 bst.insert(1)
 bst.insert(0)
-// console.log(bst)
+
+console.log(bst)
+
 bst.remove(1)
-// ?? I don't understand why gpt and bard are saying remove is correct but it seems that when I remove(1)
-// The nodes containing 2 and 3 are disappearing
-console.log(bst) 
-// bst.search(3)
+console.log(bst)
+bst.contains(3)
