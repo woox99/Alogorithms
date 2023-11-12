@@ -9,32 +9,33 @@ class MaxHeap {
     insert(data) {
         this.heap.push(data);
 
-        if (this.heap.length > 2) {
-            let currentIndex = this.heap.length - 1;
-            let parentIndex = Math.floor(currentIndex/2)
-            while (currentIndex > 1 && this.heap[currentIndex] > this.heap[parentIndex]) {
+        let currentIndex = this.heap.length - 1;
+        let parentIndex = Math.floor(currentIndex / 2)
 
-                // Swap current node and parent node
-                [this.heap[currentIndex], this.heap[parentIndex]] = [this.heap[parentIndex], this.heap[currentIndex]]
-                // Update index of current and parent node
-                currentIndex = parentIndex;
-                parentIndex = Math.floor(currentIndex/2)
-            }
+        while (currentIndex > 1 && this.heap[currentIndex] > this.heap[parentIndex]) {
+
+            // Swap current node and parent node
+            [this.heap[currentIndex], this.heap[parentIndex]] = [this.heap[parentIndex], this.heap[currentIndex]]
+            // Update index of current and parent node
+            currentIndex = parentIndex;
+            parentIndex = Math.floor(currentIndex / 2)
         }
+
+        return this;
     }
 
     // Remove always removes the root node (index 1)
-    remove(){
+    remove() {
         const removedNode = this.heap[1];
 
-        if(this.heap.length < 2){
+        if (this.heap.length < 2) {
             return null;
         }
-        else if(this.heap.length === 2){
+        else if (this.heap.length === 2) {
             this.heap.length = this.heap.length - 1;
             return removedNode;
         }
-        else if(this.heap.length > 2){
+        else if (this.heap.length > 2) {
             // Replace the root node with the last node
             this.heap[1] = this.heap[this.heap.length - 1];
             // Remove the last node
@@ -44,16 +45,16 @@ class MaxHeap {
             let leftIndex = currentIndex * 2;
             let rightIndex = currentIndex * 2 + 1;
 
-            while(
+            while (
                 (this.heap[leftIndex] && this.heap[currentIndex] < this.heap[leftIndex]) ||
                 (this.heap[rightIndex] && this.heap[currentIndex] < this.heap[rightIndex])
-            ){  
+            ) {
                 // Larger value of left or right swaps with current node so its the largest of the three when it becomes parent
-                if(this.heap[rightIndex] === undefined || this.heap[leftIndex] > this.heap[rightIndex]){
+                if (this.heap[rightIndex] === undefined || this.heap[leftIndex] > this.heap[rightIndex]) {
                     [this.heap[currentIndex], this.heap[leftIndex]] = [this.heap[leftIndex], this.heap[currentIndex]];
                     currentIndex = leftIndex;
                 }
-                else if(this.heap[leftIndex] < this.heap[rightIndex]){
+                else if (this.heap[leftIndex] < this.heap[rightIndex]) {
                     [this.heap[currentIndex], this.heap[rightIndex]] = [this.heap[rightIndex], this.heap[currentIndex]];
                     currentIndex = rightIndex;
                 }

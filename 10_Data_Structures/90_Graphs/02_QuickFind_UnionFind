@@ -32,7 +32,6 @@ class UnionFind {
         if (rootX !== rootY) {
             // If group X is smaller, add it to group Y
             if (this.depth[rootX] < this.depth[rootY]) {
-                this.root[rootX] = rootY;
                 // Set the root of all numbers added to group Y to the root of Y
                 for (let i = 0; i < this.root.length; i++) {
                     if (this.root[i] === rootX) {
@@ -42,7 +41,6 @@ class UnionFind {
             }
             // If group Y is smaller, add it to group X
             else if (this.depth[rootY] < this.depth[rootX]) {
-                this.root[rootY] = rootX;
                 for (let i = 0; i < this.root.length; i++) {
                     if (this.root[i] === rootY) {
                         this.root[i] = rootX;
@@ -51,13 +49,12 @@ class UnionFind {
             }
             // If groups are are the same size, add group Y to group X and increase the depth of group X
             else {
-                this.root[rootY] = rootX;
-                this.depth[rootX]++;
                 for (let i = 0; i < this.root.length; i++) {
                     if (this.root[i] === rootY) {
                         this.root[i] = rootX;
                     }
                 }
+                this.depth[rootX]++;
             }
         }
     }
