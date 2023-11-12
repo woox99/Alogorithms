@@ -2,6 +2,7 @@ class Node{
     constructor(data){
         this.data = data;
         this.next = null;
+        this.prev = null;
     }
 }
 
@@ -27,7 +28,7 @@ class Stack{
 
         newNode.prev = this.tail;
         this.tail.next = newNode;
-        this.tail = this.tail.next;
+        this.tail = newNode;
         this.size++;
         return this;
     }
@@ -85,7 +86,7 @@ class Stack{
 }
 
 const stack = new Stack()
-stack.push(3).push(2).push(1).pop()
+stack.push(3).push(2).push(1).pop().push(5).push(6)
 // console.log(stack)
 // stack.peek()
 stack.display()

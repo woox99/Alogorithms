@@ -87,4 +87,4 @@ uf.union(0,2)
 
 // uf.connected(1,3);
 
-console.log(uf.parent)
+// console.log(uf.parent)

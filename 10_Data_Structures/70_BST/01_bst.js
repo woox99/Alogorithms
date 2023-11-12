@@ -11,6 +11,7 @@ class BST {
         this.root = null;
     }
 
+    // Inserted node will always get added to the top and fall to the bottom of a branch
     insert(data) {
         const newNode = new Node(data);
         let currentNode = this.root;
@@ -50,7 +51,7 @@ class BST {
 
         const searchTree = currentNode => {
             // If node reached the bottom, return false
-            if (currentNode === null) {
+            if (!currentNode) {
                 console.log(false);
                 return false;
             }
@@ -77,16 +78,23 @@ class BST {
                 currentNode.right = removeNode(currentNode.right, data);
             } 
             if(data === currentNode.data) {
-                if (currentNode.left === null) {
+                // If currentNode has no children
+                if (!currentNode.left && !currentNode.right) {
+                    return null;
+                }
+
+                // If currentNode only has one child
+                if (!currentNode.left) {
                     return currentNode.right;
                 } 
-                if (currentNode.right === null) {
+                if (!currentNode.right) {
                     return currentNode.left;
                 }
     
+                // If current node has two children
                 let tempNode = currentNode.right;
                 while(tempNode.left){
-                    tempNode = currentNode.left;
+                    tempNode = tempNode.left;
                 }
                 currentNode.data = tempNode.data;
                 currentNode.right = removeNode(currentNode.right, tempNode.data);

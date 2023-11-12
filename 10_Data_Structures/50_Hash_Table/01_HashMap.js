@@ -62,13 +62,12 @@ class HashTable{
     remove(key){
         const index = this.hash(key);
 
-        for(const entry of this.table[index]){
-            this.table[index] = this.table[index].filter(entry => entry.key !== key)
-        }
+        this.table[index] = this.table[index].filter(entry => entry.key !== key)
 
         return this;
     }
 
+    // O(N)
     contains(key){
         const index = this.hash(key);
 
