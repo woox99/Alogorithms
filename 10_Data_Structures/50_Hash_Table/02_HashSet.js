@@ -2,35 +2,39 @@
 // Useful if you wanted to store a hashset of names AND check if the hashset contains the name
 
 class HashTable{
+    // O(1)
     constructor(size){
         this.table = new Array(size);
         this.size = size;
     }
-
+    
+    // O(1)
     hash(key){
         let hash = 0;
-
+        
         for(const char of key){
             hash += char.charCodeAt(0);
         }
-
+        
         const index = hash % this.size;
         return index;
     }
-
+    
+    // O(1)
     set(key){
         const index = this.hash(key);
-
+        
         if(!this.table[index]){
             this.table[index] = [];
         }
-
+        
         this.table[index].push(key);
     }
-
+    
+    // O(n) where n is the number of entries in the bucket
     remove(key){
         const index = this.hash(key);
-
+        
         if(!this.table[index]){
             return null;
         }
@@ -40,6 +44,7 @@ class HashTable{
         return;
     }
 
+    // O(n) where n is the number of entries int eh bucket
     contains(key){
         const index = this.hash(key);
 
