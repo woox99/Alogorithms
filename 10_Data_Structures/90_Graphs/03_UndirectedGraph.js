@@ -6,6 +6,7 @@ class Graph {
         this.vertices = new Map();
     }
 
+    // Vertext is a node
     addVertex(vertex){
         if(!this.vertices.has(vertex)){
             this.vertices.set(vertex, [])
